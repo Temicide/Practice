@@ -26,16 +26,14 @@ class Solution
     {
         double sum = 0, prof = 0;
         int tmp, pos; 
-        vector<pair<double, int>> r; 
+        priority_queue<pair<double, int>> r; 
         for(int i = 0; i < n; i++){
-            r.push_back({double(arr[i].value)/double(arr[i].weight), i});
+            r.push({double(arr[i].value)/double(arr[i].weight), i});
         }
         
-        sort(r.begin(), r.end(), greater<pair<double, int>>());
-        
         for(int i = 0; i < n; i++){
-            pos = r[i].second; 
-            
+            pos = r.top().second; 
+            r.pop();
             sum += arr[pos].weight; 
             prof += arr[pos].value; 
             if(sum > W)break;
